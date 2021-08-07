@@ -1,1 +1,3 @@
 jetson-ai-programs/.venv/*
+jetson-ai-programs/logs/*
+jetson-ai-programs/mnist.hd5/*

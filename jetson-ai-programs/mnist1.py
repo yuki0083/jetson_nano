@@ -1,4 +1,5 @@
 import tensorflow as tf
+from tensorflow.keras import callbacks
 
 mnist = tf.keras.datasets.mnist
 
@@ -21,7 +22,14 @@ model.compile(optimizer='adam',
               loss=loss_fn,
               metrics=['accuracy'])
 
-#訓練
-model.fit(x_train, y_train, epochs=5)
+"""tensorboard"""
+#logの保存場所
+log_filepath = "./logs/"
+tb_cb = tf.keras.callbacks.TensorBoard(log_dir=log_filepath, histogram_freq=1)
 
+#訓練
+model.fit(x_train, y_train, epochs=5, validation_data=(x_test, y_test), callbacks=[tb_cb])
+#評価
 model.evaluate(x_test,  y_test)
+#保存
+model.save('mnist.hd5')
